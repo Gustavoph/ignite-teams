@@ -1,16 +1,19 @@
-import { Header } from '@components/Header'
-import { Container, Content, Icon } from './styles'
-import { Highlight } from '@components/Highlight'
-import { Button } from '@components/Button'
-import { Input } from '@components/Input'
-import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
+import { Header } from '@components/Header'
+import { Highlight } from '@components/Highlight'
+import { Container, Content, Icon } from './styles'
+import { groupCreate } from '@storage/group/groupCreate'
 
 export function NewGroup() {
   const [group, setGroup] = useState('')
   const navigation = useNavigation()
 
-  function handleNewGroup() {
+  async function handleNewGroup() {
+    await groupCreate(group)
     navigation.navigate('players', { group })
   }
 
